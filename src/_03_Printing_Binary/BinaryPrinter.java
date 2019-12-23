@@ -8,7 +8,7 @@ public class BinaryPrinter {
 	//Create a main method to test your methods.
 	
 	public void printByteBinary(byte b) {
-	
+		
 	}
 	
 	public void printShortBinary(short s) {
@@ -16,6 +16,37 @@ public class BinaryPrinter {
 	}
 	
 	public void printIntBinary(int i) {
+		boolean[] bit;
+		boolean negative = false;
+		if(i < 0) {
+			negative = true;
+			i = i*(-1);
+		}
+		int power = 0;
+		boolean bool = true;
+		while(bool) {
+			int check = 1;
+			for(int j = 0; j < power; j++) {
+				check = check*2;
+			}
+			if(i < check) {
+				power--;
+				int current = i;
+				bit = new boolean[power];
+				boolean bool2 = true;
+				for(int j = power-1; j >= 0; j--) {
+					if(current-check > 0) {
+						current -= check;
+						bit[j] = true;
+					}else {
+						bit[j] = false;
+					}
+					check = check/2;
+				}
+				bool = false;
+			}
+			power++;
+		}
 		
 	}
 	
