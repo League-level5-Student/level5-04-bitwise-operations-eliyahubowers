@@ -1,5 +1,7 @@
 package _03_Printing_Binary;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class BinaryPrinter {
 	//Complete the methods below so they print the passed in parameter in binary.
 	//Use bit shifting and bit masking to print the binary numbers.
@@ -7,22 +9,18 @@ public class BinaryPrinter {
 	//Don't be afraid to use the methods that are already complete to finish the others.
 	//Create a main method to test your methods.
 	
-	public void printByteBinary(byte b) {
-		
+	public void printByteBinary(byte b){
+		String ss = b + "";
+		printIntBinary(Integer.parseInt(ss));
 	}
 	
 	public void printShortBinary(short s) {
-		
+		String ss = s + "";
+		printIntBinary(Integer.parseInt(ss));
 	}
 	
 	public void printIntBinary(int i) {
-		boolean[] bit;
-		boolean negative = false;
-		if(i < 0) {
-			negative = true;
-			i = i*(-1);
-		}
-		int power = 0;
+		int power = 1;
 		boolean bool = true;
 		while(bool) {
 			int check = 1;
@@ -30,19 +28,20 @@ public class BinaryPrinter {
 				check = check*2;
 			}
 			if(i < check) {
-				power--;
+				power --;
+				check = check/2;
 				int current = i;
-				bit = new boolean[power];
-				boolean bool2 = true;
-				for(int j = power-1; j >= 0; j--) {
-					if(current-check > 0) {
+				String s = "";
+				for(int j = power; j >= 0; j--) {
+					if(current - check >= 0) { 
+						s += "1";
 						current -= check;
-						bit[j] = true;
 					}else {
-						bit[j] = false;
+						s += "0";
 					}
 					check = check/2;
 				}
+				System.out.println(s);
 				bool = false;
 			}
 			power++;
@@ -51,6 +50,17 @@ public class BinaryPrinter {
 	}
 	
 	public void printLongBinary(long l) {
-		
+		String ss = l + "";
+		printIntBinary(Integer.parseInt(ss));
+	}
+	
+	//--
+	
+	int pow(int num, int pow) {
+		int j = 1;
+		for(int i = 0; i < pow; i++) {
+			j = j * num;
+	    }
+		return j;
 	}
 }
