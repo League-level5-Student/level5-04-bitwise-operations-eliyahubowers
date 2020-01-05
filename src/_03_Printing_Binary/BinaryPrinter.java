@@ -45,8 +45,7 @@ public class BinaryPrinter {
 				bool = false;
 			}
 			power++;
-		}
-		
+		}		
 	}
 	
 	public void printLongBinary(long l) {

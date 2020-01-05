@@ -2,6 +2,7 @@ package _04_Base64_Decoder;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Base64Decoder {
 	/*
@@ -39,7 +40,7 @@ public class Base64Decoder {
 	public static byte convertBase64Char(char c){
 		for(int i = 0; i < base64Chars.length; i++) {
 			if(base64Chars[i] == c) {
-				 
+				 return (byte) (i);
 			}
 		}
 		return 0;
@@ -49,16 +50,45 @@ public class Base64Decoder {
 	//   characters long and return an array of 3 bytes (24 bits). The byte 
 	//   array should be the binary value of the encoded characters.
 	public static byte[] convert4CharsTo24Bits(String s){
-		byte[] b = new byte[3];
-		for(int i = 0 ; i < s.length(); i++) {
-			
+		byte[] currentBytes = new byte[4];
+		byte[] returnBytes = new byte[3];
+		for(int i = 0; i < s.length(); i++) {
+			currentBytes[i] = (byte) (convertBase64Char(s.charAt(i)) << 2);
 		}
-		return null;
+		int retBytOn = 0;
+		int bitOn = 0;
+		int curBytOn = 0;
+		int bitLeftInByt = 6;
+		boolean t = true;
+		while (t) {
+			returnBytes[retBytOn] = (byte) (returnBytes[retBytOn] | (currentBytes[curBytOn] >> bitOn));
+			currentBytes[curBytOn] = (byte) (currentBytes[curBytOn] << bitOn);
+			int tempBLIB = bitLeftInByt;
+			bitLeftInByt -= 8-bitOn;
+			bitOn += tempBLIB;
+			if(bitOn >= 8) {
+				bitOn = 0;
+				retBytOn ++;
+				if(retBytOn >= 3) {
+					t = false;
+				}
+			}
+			if(bitLeftInByt <= 0) {
+				bitLeftInByt = 6;
+				curBytOn ++;
+			}
+		}
+		return returnBytes;
 	}
 	
 	//3. Complete this method so that it takes in a string of any length
 	//   and returns the full byte array of the decoded base64 characters.
 	public static byte[] base64StringToByteArray(String file) {
+		ArrayList<Byte> bytes = new ArrayList<Byte>();
+		for(int i = 0; i < file.length(); i+=4) {
+			byte[] 
+			bytes.addAll();
+		}
 		return null;
 	}
 }
