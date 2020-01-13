@@ -71,6 +71,7 @@ public class Base64DecoderTester {
 			int ctr = 0;
 			while (line != null) {
 				assertEquals(bits[ctr++], Byte.parseByte(line));
+				
 				line = br.readLine();
 			}
 			br.close();
